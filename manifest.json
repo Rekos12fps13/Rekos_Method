@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Rekos HD Uploader",
+  "version": "1.0.0",
+  "description": "Tools For HD High Quality Uploads on Tiktok",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.tiktok.com/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Rekos HD Uploader",
+    "default_icon": {
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  "icons": {
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tiktok.com/*"
+      ],
+      "js": [
+        "src/tiktok.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "src/worker.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "encoder/encoder-frame.html",
+        "encoder/encoder-frame.js",
+        "encoder/encoder-worker.js",
+        "encoder/encode-job.js",
+        "encoder/core/*",
+        "encoder/ffmpeg/*"
+      ],
+      "matches": [
+        "https://*.tiktok.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:",
+    "sandbox": "sandbox allow-scripts; script-src 'self' 'wasm-unsafe-eval'; child-src 'self';"
+  }
+}

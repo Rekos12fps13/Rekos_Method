@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rekos HD Uploader</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0b0e;--card:#15151a;--line:#292932;--text:#f5f5f7;--muted:#9c9ca8;--accent:#fe2c55}
+*{box-sizing:border-box}body{margin:0;width:390px;min-height:560px;background:radial-gradient(circle at 80% 0,#2a1018 0,#0b0b0e 40%);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+main{padding:18px}.brand{display:flex;align-items:center;justify-content:space-between}.brand h1{font-size:20px;margin:0}.pill{font-size:11px;border:1px solid #34343e;border-radius:999px;padding:5px 8px;color:#bdbdc8}
+.sub{color:var(--muted);margin:4px 0 16px}.card{background:rgba(21,21,26,.94);border:1px solid var(--line);border-radius:15px;padding:14px;margin:10px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.title{font-weight:650}.muted{color:var(--muted);font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.feature{padding:10px;border:1px solid #25252d;border-radius:11px;background:#111116}.feature b{display:block;font-size:12px;margin-bottom:2px}.feature span{font-size:11px;color:var(--muted)}
+button,.button{border:0;border-radius:10px;padding:10px 12px;font-weight:650;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.primary{background:var(--accent);color:white;width:100%}.secondary{background:#26262e;color:white}.ghost{background:transparent;color:#ddd;border:1px solid #33333d}.file{width:100%;margin-top:10px}.status{margin-top:10px;font-size:12px;color:#bdbdc8;min-height:18px}.progress{height:5px;background:#292932;border-radius:99px;overflow:hidden;margin-top:8px}.bar{height:100%;width:0;background:var(--accent);transition:width .15s}.switch{position:relative;width:42px;height:24px}.switch input{display:none}.slider{position:absolute;inset:0;border-radius:99px;background:#363640;cursor:pointer}.slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:white;transition:.2s}.switch input:checked+.slider{background:var(--accent)}.switch input:checked+.slider:before{transform:translateX(18px)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.small{font-size:11px;color:#858592;margin-top:10px}.warn{color:#ffbd6b}.ok{color:#75e0a0}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><h1>Rekos HD Uploader</h1><span class="pill">LOCAL • v1.0</span></div>
+  <div class="sub">Enhanced TikTok upload workflow • up to 1080p / 60 FPS</div>
+
+  <div class="card">
+    <div class="row"><div><div class="title">Video preparation</div><div class="muted">Remux first — no re-encode when compatible</div></div><span id="codecBadge" class="pill">READY</span></div>
+    <input id="file" class="file" type="file" accept="video/mp4,video/quicktime,.mp4,.mov">
+    <div id="meta" class="muted" style="margin-top:8px"></div>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+    <div id="status" class="status">Choose an MP4 or MOV video.</div>
+    <button id="process" class="primary" disabled>Prepare Video Locally</button>
+    <a id="download" class="button secondary" style="display:none;width:100%;margin-top:8px">Download prepared video</a>
+  </div>
+
+  <div class="card">
+    <div class="row"><div><div class="title">Upload workflow</div><div class="muted">Open TikTok Studio and use the prepared file</div></div></div>
+    <div class="actions" style="margin-top:10px">
+      <button id="login" class="ghost">TikTok Login</button>
+      <button id="upload" class="secondary">TikTok Upload</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <div class="feature"><b>1080p • 60 FPS</b><span>Quality ceiling for this workflow</span></div>
+      <div class="feature"><b>H.264 / H.265</b><span>Preserve compatible source codecs</span></div>
+      <div class="feature"><b>AAC • MP4 / MOV</b><span>Accepted source targets</span></div>
+      <div class="feature"><b>On-device</b><span>Video stays in your browser</span></div>
+      <div class="feature"><b>Original sound</b><span>Audio is preserved during remux</span></div>
+      <div class="feature"><b>Story-ready</b><span>Use the prepared file in Story where available</span></div>
+      <div class="feature"><b>@Mentions</b><span>Use TikTok's native mention UI</span></div>
+      <div class="feature"><b>Edit cover</b><span>Choose the cover in TikTok Studio</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row"><div><div class="title">Watermark / caption tag</div><div class="muted">Adds a caption tag only; it does not alter pixels</div></div>
+      <label class="switch"><input id="watermark" type="checkbox"><span class="slider"></span></label>
+    </div>
+    <div class="row" style="margin-top:12px"><div><div class="title">Repost helper</div><div class="muted">Disables this extension's repost prompt; it cannot remove platform reposts</div></div>
+      <label class="switch"><input id="repost" type="checkbox" checked><span class="slider"></span></label>
+    </div>
+  </div>
+
+  <div class="small">Note: “no compression” means the compatible preparation path remuxes the original streams. TikTok may still transcode videos on its servers.</div>
+</main>
+<script src="popup.js"></script>
+</body>
+</html>
